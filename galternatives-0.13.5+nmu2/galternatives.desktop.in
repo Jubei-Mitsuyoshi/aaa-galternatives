@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+_Name=Alternatives Configurator
+_Comment=Configure the system default alternatives
+Type=Application
+Exec=/usr/sbin/galternatives
+TryExec=
+Icon=/usr/share/pixmaps/galternatives.png
+X-GNOME-DocPath=
+Terminal=false
+Categories=GTK;Application;System;
+StartupNotify=true

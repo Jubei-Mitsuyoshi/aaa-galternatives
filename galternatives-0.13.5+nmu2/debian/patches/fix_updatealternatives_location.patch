@@ -1,0 +1,76 @@
+Description: <short summary of the patch>
+ .updated update-alternatives command path to /usr/bin
+  on my debian sid box that is now the new location
+ galternatives (0.13.5+nmu2) unstable; urgency=low
+ .
+   [ Piotr Ożarowski ]
+   * Non-maintainer upload.
+   * Change XS-Python-Version from "current" to ">= 2.4" (closes: #586317)
+ .
+   [ Andreas Barth ]
+   * actually uploading to unstable
+Author: Andreas Barth <aba@not.so.argh.org>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- galternatives-0.13.5+nmu2.orig/galternatives/main.py
++++ galternatives-0.13.5+nmu2/galternatives/main.py
+@@ -11,7 +11,7 @@ from alternative import Alternative
+ 
+ _ = gettext.gettext
+ 
+-DEBUG = False
++DEBUG = True
+ def print_debug (str):
+     if DEBUG:
+         print str
+@@ -218,7 +218,7 @@ class GAlternatives:
+ 
+         priority = self.add_opt_spin.get_value ()
+ 
+-        cmd = '/usr/sbin/update-alternatives --install %s %s %s %d > /dev/null 2>&1' % (link, unixname, path, priority)
++        cmd = '/usr/bin/update-alternatives --install %s %s %s %d > /dev/null 2>&1' % (link, unixname, path, priority)
+         result = os.system (cmd)
+ 
+         print_debug (cmd)
+@@ -253,7 +253,7 @@ class GAlternatives:
+         option = self.options_model.get_value (iter, self.OPTIONS)
+         
+         if self.ask_for_confirmation (_('Are you sure you want to remove this option?')):
+-            cmd = '/usr/sbin/update-alternatives --remove %s %s > /dev/null 2>&1' % (unixname, option)
++            cmd = '/usr/bin/update-alternatives --remove %s %s > /dev/null 2>&1' % (unixname, option)
+             result = os.system (cmd)
+             print_debug (cmd)
+             print_debug ('Result: %d' % (result))
+@@ -280,9 +280,9 @@ class GAlternatives:
+         unixname = alt.get_unixname ()
+         option = self.options_model.get_value (iter, self.OPTIONS)
+ 
+-        result = os.system ('/usr/sbin/update-alternatives --set %s %s  > /dev/null 2>&1' % (unixname, option))
++        result = os.system ('/usr/bin/update-alternatives --set %s %s  > /dev/null 2>&1' % (unixname, option))
+ 
+-        print_debug ('/usr/sbin/update-alternatives --set %s %s > /dev/null 2>&1' % (unixname, option))
++        print_debug ('/usr/bin/update-alternatives --set %s %s > /dev/null 2>&1' % (unixname, option))
+         print_debug ('Result: %d' % (result))
+ 
+         def deactivate (model, path, iter):
+@@ -371,7 +371,7 @@ class GAlternatives:
+         option = self.status_menu.get_history ()
+         if option == 0:
+             alt.set_option_status ('auto')
+-            os.system ('/usr/sbin/update-alternatives --auto %s  > /dev/null 2>&1' % (alt.get_unixname ()))
++            os.system ('/usr/bin/update-alternatives --auto %s  > /dev/null 2>&1' % (alt.get_unixname ()))
+         else:
+             alt.set_option_status ('manual')
+             tm, iter = selection.get_selected ()
