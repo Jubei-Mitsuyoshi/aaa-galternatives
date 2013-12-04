@@ -1,4 +1,6 @@
 aaa-galternatives
 =================
 
-galternatives patched to wprk on sid
+galternatives patched to work on sid
+
+STATUS: packaged running tested
