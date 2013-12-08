@@ -1,4 +1,4 @@
-galternatives (0.13.5) unstable; urgency=low
+galternatives (0.13.5-aaa) unstable; urgency=low
 
   * added patch for debian sid, update-alternatives now at
   */usr/bin not /usr/sbin
